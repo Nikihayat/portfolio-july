@@ -1,0 +1,875 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Niki Hayatbini, PhD — Postdoctoral Scholar working at the intersection of AI/ML, precision nutrition, and behavioral health research.">
+<meta name="color-scheme" content="dark">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%230B0F16'/><text y='68' font-size='46' font-family='Arial' fill='%235EEAD4' text-anchor='middle' x='50'>NH</text></svg>">
+<title>Niki Hayatbini, PhD — Postdoctoral Scholar</title>
+<style>
+    /* ---------------------------------------------------------
+       Design tokens — "vital signal" identity
+       A dark, data/health-monitor aesthetic: near-black surfaces,
+       a mint "signal" accent standing in for a heart-rate trace,
+       a warm coral used sparingly for contrast. Deliberately
+       sans-only (no serif) and dark-mode, to read nothing like
+       a warm-paper editorial layout.
+    ----------------------------------------------------------*/
+    :root {
+        --bg: #0B0F16;
+        --bg-raised: #121826;
+        --bg-raised-2: #1A2233;
+        --line: #2A3346;
+        --text: #EAF0F3;
+        --text-soft: #97A3B6;
+        --signal: #5EEAD4;
+        --signal-dim: #2E7D74;
+        --signal-bg: rgba(94, 234, 212, 0.1);
+        --coral: #FF9270;
+        --coral-bg: rgba(255, 146, 112, 0.12);
+        --focus-ring: #FFD166;
+
+        --font-display: 'Space Grotesk', 'Segoe UI', sans-serif;
+        --font-body: 'Inter', 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
+        --font-mono: 'Space Mono', 'Courier New', monospace;
+
+        --fs-h1: clamp(2.3rem, 1.6rem + 3vw, 3.8rem);
+        --fs-h2: clamp(1.5rem, 1.3rem + 0.9vw, 2.1rem);
+        --fs-h3: clamp(1.1rem, 1.02rem + 0.4vw, 1.3rem);
+        --fs-body: 1.0625rem;
+
+        --space-xs: 0.5rem;
+        --space-sm: 1rem;
+        --space-md: 1.75rem;
+        --space-lg: 3rem;
+        --space-xl: 5rem;
+
+        --radius: 16px;
+        --radius-sm: 10px;
+        --max-width: 1080px;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    @media (prefers-reduced-motion: reduce) {
+        html { scroll-behavior: auto; }
+        *, *::before, *::after {
+            animation-duration: 0.001ms !important;
+            animation-iteration-count: 1 !important;
+            transition-duration: 0.001ms !important;
+            scroll-behavior: auto !important;
+        }
+    }
+
+    body {
+        margin: 0;
+        font-family: var(--font-body);
+        font-size: var(--fs-body);
+        line-height: 1.7;
+        color: var(--text);
+        background-color: var(--bg);
+        background-image:
+            radial-gradient(600px circle at 15% -10%, rgba(94,234,212,0.08), transparent 60%),
+            radial-gradient(500px circle at 100% 10%, rgba(255,146,112,0.06), transparent 55%);
+        background-attachment: fixed;
+        -webkit-font-smoothing: antialiased;
+    }
+
+    h1, h2, h3 {
+        font-family: var(--font-display);
+        color: var(--text);
+        line-height: 1.15;
+        font-weight: 600;
+        margin: 0;
+    }
+
+    p { margin: 0 0 var(--space-sm); color: var(--text-soft); }
+    strong, b, em { color: var(--text); }
+
+    a { color: var(--signal); text-decoration-thickness: 1.5px; text-underline-offset: 3px; }
+    a:hover { color: var(--text); }
+
+    a:focus-visible,
+    button:focus-visible,
+    [tabindex]:focus-visible {
+        outline: 3px solid var(--focus-ring);
+        outline-offset: 3px;
+        border-radius: 4px;
+    }
+
+    img { max-width: 100%; display: block; }
+
+    .visually-hidden {
+        position: absolute; width: 1px; height: 1px;
+        padding: 0; margin: -1px; overflow: hidden;
+        clip: rect(0,0,0,0); white-space: nowrap; border: 0;
+    }
+
+    .skip-link {
+        position: absolute; left: 1rem; top: -3.5rem;
+        background: var(--signal); color: var(--bg);
+        padding: 0.75rem 1.25rem; border-radius: 0 0 8px 8px;
+        z-index: 2000; transition: top 0.2s ease; font-weight: 700;
+    }
+    .skip-link:focus { top: 0; }
+
+    /* ---------------- Navigation: floating pill ---------------- */
+    header.site-header {
+        position: sticky; top: 0.9rem; z-index: 1000;
+        padding: 0 1.25rem;
+    }
+    .nav-container {
+        max-width: var(--max-width);
+        margin: 0 auto;
+        display: flex; align-items: center; justify-content: space-between;
+        gap: 1rem;
+        background: rgba(18, 24, 38, 0.75);
+        backdrop-filter: blur(14px);
+        -webkit-backdrop-filter: blur(14px);
+        border: 1px solid var(--line);
+        border-radius: 999px;
+        padding: 0.6rem 0.6rem 0.6rem 1.25rem;
+    }
+
+    .nav-logo {
+        font-family: var(--font-display);
+        font-size: 1.05rem;
+        font-weight: 700;
+        color: var(--text);
+        text-decoration: none;
+        white-space: nowrap;
+        display: flex; align-items: center; gap: 0.5rem;
+    }
+    .nav-logo .dot {
+        width: 9px; height: 9px; border-radius: 50%;
+        background: var(--signal);
+        box-shadow: 0 0 0 4px var(--signal-bg);
+    }
+    .nav-logo:hover { color: var(--signal); }
+
+    .nav-links {
+        display: flex; list-style: none; gap: 0.25rem;
+        margin: 0; padding: 0;
+    }
+
+    .nav-links a {
+        text-decoration: none;
+        color: var(--text-soft);
+        font-weight: 600;
+        font-size: 0.92rem;
+        padding: 0.55rem 0.9rem;
+        border-radius: 999px;
+        min-height: 40px;
+        display: inline-flex; align-items: center;
+        transition: background 0.15s ease, color 0.15s ease;
+    }
+    .nav-links a:hover { color: var(--text); background: var(--bg-raised-2); }
+    .nav-links a[aria-current="page"] {
+        color: var(--bg);
+        background: var(--signal);
+    }
+
+    .nav-cta {
+        display: flex; align-items: center; gap: 0.5rem;
+    }
+    .nav-cta a.cv-btn {
+        font-family: var(--font-mono);
+        font-size: 0.82rem;
+        color: var(--bg);
+        background: var(--signal);
+        text-decoration: none;
+        padding: 0.55rem 1rem;
+        border-radius: 999px;
+        font-weight: 700;
+        white-space: nowrap;
+    }
+    .nav-cta a.cv-btn:hover { background: var(--text); }
+
+    .mobile-menu-btn {
+        display: none;
+        background: var(--bg-raised-2);
+        border: 1px solid var(--line);
+        border-radius: 999px;
+        font-size: 1.1rem;
+        width: 42px; height: 42px;
+        cursor: pointer;
+        color: var(--text);
+    }
+
+    /* ---------------- Layout ---------------- */
+    .main-content {
+        max-width: var(--max-width);
+        margin: 0 auto;
+        padding: var(--space-lg) 1.25rem var(--space-xl);
+    }
+
+    .page { display: none; }
+    .page.active { display: block; }
+
+    .eyebrow {
+        font-family: var(--font-mono);
+        font-size: 0.8rem;
+        letter-spacing: 0.06em;
+        color: var(--signal);
+        font-weight: 700;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        margin-bottom: var(--space-sm);
+    }
+    .eyebrow::before {
+        content: '';
+        width: 6px; height: 6px; border-radius: 50%;
+        background: var(--signal);
+        box-shadow: 0 0 0 3px var(--signal-bg);
+    }
+
+    h1.name { font-size: var(--fs-h1); margin-bottom: 0.75rem; }
+    h1.name .accent {
+        background: linear-gradient(90deg, var(--signal), var(--coral));
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+    }
+    h1:focus-visible { outline: none; }
+
+    .hero-section { margin-bottom: var(--space-lg); }
+
+    /* ---------------- Hero grid + waveform ---------------- */
+    .profile-container {
+        display: grid;
+        grid-template-columns: 1fr 260px;
+        gap: var(--space-lg);
+        align-items: center;
+        margin-bottom: var(--space-lg);
+    }
+
+    .hero-copy .role { max-width: 58ch; font-size: 1.05rem; }
+    .hero-copy .role strong { color: var(--text); }
+
+    .social-icons { display: flex; gap: 0.5rem; margin-top: var(--space-sm); }
+    .social-link {
+        color: var(--text-soft);
+        width: 42px; height: 42px; border-radius: 50%;
+        display: flex; align-items: center; justify-content: center;
+        border: 1px solid var(--line);
+        background: var(--bg-raised);
+    }
+    .social-link:hover { color: var(--signal); border-color: var(--signal-dim); }
+    .social-link svg { width: 20px; height: 20px; }
+
+    .portrait-frame {
+        position: relative;
+        justify-self: center;
+        width: 100%;
+        max-width: 220px;
+    }
+    .portrait-frame::before {
+        content: '';
+        position: absolute;
+        inset: -10px;
+        border-radius: 50%;
+        background: conic-gradient(from 180deg, var(--signal), var(--coral), var(--signal));
+        opacity: 0.55;
+        filter: blur(2px);
+        z-index: 0;
+    }
+    .profile-pic {
+        position: relative;
+        z-index: 1;
+        width: 100%;
+        aspect-ratio: 1 / 1;
+        border-radius: 50%;
+        object-fit: cover;
+        background-color: var(--bg-raised);
+        border: 4px solid var(--bg);
+        display: block;
+    }
+
+    /* Signature element: a drawn "vital signal" trace under the hero */
+    .signal-strip {
+        width: 100%;
+        height: 64px;
+        margin: var(--space-md) 0 var(--space-lg);
+        border-top: 1px solid var(--line);
+        border-bottom: 1px solid var(--line);
+        display: flex;
+        align-items: center;
+    }
+    .signal-strip svg { width: 100%; height: 100%; overflow: visible; }
+    .signal-strip path {
+        fill: none;
+        stroke: var(--signal);
+        stroke-width: 2;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        stroke-dasharray: 900;
+        stroke-dashoffset: 900;
+        animation: draw-signal 2.4s ease-out forwards;
+    }
+    @keyframes draw-signal {
+        to { stroke-dashoffset: 0; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+        .signal-strip path { stroke-dashoffset: 0; animation: none; }
+    }
+
+    /* ---------------- Vitals strip (field notes, reimagined) ---------------- */
+    .vitals {
+        list-style: none;
+        margin: 0 0 var(--space-xl);
+        padding: 0;
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1px;
+        background: var(--line);
+        border: 1px solid var(--line);
+        border-radius: var(--radius);
+        overflow: hidden;
+    }
+    .vital {
+        background: var(--bg-raised);
+        padding: var(--space-md);
+    }
+    .vital-label {
+        display: block;
+        font-family: var(--font-mono);
+        font-size: 0.7rem;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: var(--coral);
+        font-weight: 700;
+        margin-bottom: 0.4rem;
+    }
+    .vital-value {
+        font-size: 0.95rem;
+        color: var(--text);
+        line-height: 1.5;
+    }
+    .vital-value em { color: var(--text-soft); font-style: normal; }
+
+    /* ---------------- Sections ---------------- */
+    .section { margin-bottom: var(--space-xl); }
+
+    .section-title {
+        font-size: var(--fs-h2);
+        margin-bottom: var(--space-md);
+        display: flex;
+        align-items: baseline;
+        gap: 0.75rem;
+    }
+    .section-title .index {
+        font-family: var(--font-mono);
+        font-size: 0.9rem;
+        color: var(--signal);
+        font-weight: 700;
+    }
+
+    /* Publications */
+    .publication-item,
+    .publication-full-item {
+        display: grid;
+        grid-template-columns: 5.5rem 1fr;
+        gap: var(--space-md);
+        padding: var(--space-md) 0;
+        border-bottom: 1px solid var(--line);
+    }
+    .publication-item:last-child,
+    .publication-full-item:last-child { border-bottom: none; }
+
+    .pub-year {
+        font-family: var(--font-mono);
+        font-size: 0.85rem;
+        font-weight: 700;
+        color: var(--bg);
+        background: var(--signal);
+        border-radius: 999px;
+        padding: 0.35rem 0;
+        text-align: center;
+        height: fit-content;
+    }
+
+    .publication-title,
+    .publication-full-title {
+        font-family: var(--font-display);
+        font-weight: 600;
+        color: var(--text);
+        margin-bottom: 0.4rem;
+        font-size: var(--fs-h3);
+        line-height: 1.4;
+    }
+
+    .publication-venue,
+    .publication-full-venue,
+    .publication-full-authors {
+        color: var(--text-soft);
+        font-size: 0.95rem;
+        line-height: 1.6;
+    }
+    .publication-full-authors { margin-bottom: 0.3rem; }
+    .publication-full-venue { margin-bottom: 0.5rem; }
+
+    .publication-venue a,
+    .publication-link {
+        font-family: var(--font-mono);
+        font-size: 0.85rem;
+        color: var(--signal);
+    }
+
+    .publication-impact {
+        display: inline-block;
+        background-color: var(--coral-bg);
+        color: var(--coral);
+        padding: 0.2rem 0.65rem;
+        border-radius: 999px;
+        font-family: var(--font-mono);
+        font-size: 0.78rem;
+        font-weight: 700;
+        margin-top: 0.4rem;
+    }
+
+    /* ---------------- Media coverage ---------------- */
+    .media-item {
+        margin-bottom: var(--space-md);
+        padding: var(--space-md);
+        background-color: var(--bg-raised);
+        border: 1px solid var(--line);
+        border-radius: var(--radius);
+        position: relative;
+        overflow: hidden;
+    }
+    .media-item::before {
+        content: '';
+        position: absolute;
+        left: 0; top: 0; bottom: 0;
+        width: 4px;
+        background: linear-gradient(180deg, var(--signal), var(--coral));
+    }
+
+    .media-title {
+        font-family: var(--font-display);
+        font-weight: 600;
+        color: var(--text);
+        margin-bottom: var(--space-sm);
+        font-size: var(--fs-h3);
+        line-height: 1.4;
+    }
+
+    .media-byline {
+        font-family: var(--font-mono);
+        font-size: 0.82rem;
+        color: var(--coral);
+        margin-bottom: var(--space-sm);
+    }
+
+    .media-description { line-height: 1.7; margin-bottom: var(--space-sm); }
+    .media-link { font-weight: 700; }
+
+    /* ---------------- Footer ---------------- */
+    footer.site-footer {
+        border-top: 1px solid var(--line);
+        padding: var(--space-lg) 1.25rem;
+        text-align: center;
+        color: var(--text-soft);
+        font-size: 0.9rem;
+    }
+
+    /* ---------------- Responsive ---------------- */
+    @media (min-width: 600px) {
+        .main-content { padding-left: 2rem; padding-right: 2rem; }
+    }
+
+    @media (max-width: 767px) {
+        .nav-links {
+            display: none;
+            position: absolute;
+            top: calc(100% + 0.5rem);
+            left: 1.25rem; right: 1.25rem;
+            background-color: var(--bg-raised);
+            border: 1px solid var(--line);
+            flex-direction: column;
+            gap: 0.25rem;
+            padding: 0.75rem;
+            border-radius: var(--radius);
+        }
+        .nav-links.active { display: flex; }
+        .nav-links a { width: 100%; }
+        .nav-cta .cv-btn-text { display: none; }
+        .mobile-menu-btn { display: block; }
+
+        .profile-container { grid-template-columns: 1fr; text-align: center; }
+        .portrait-frame { max-width: 160px; order: -1; margin: 0 auto var(--space-md); }
+        .social-icons { justify-content: center; }
+        .hero-copy .role { margin-left: auto; margin-right: auto; }
+
+        .vitals { grid-template-columns: 1fr; }
+
+        .publication-item,
+        .publication-full-item { grid-template-columns: 1fr; gap: 0.5rem; }
+        .pub-year { width: fit-content; padding: 0.25rem 0.75rem; }
+    }
+
+    @media (min-width: 900px) {
+        .vitals { grid-template-columns: repeat(3, 1fr); }
+    }
+</style>
+</head>
+<body>
+    <a class="skip-link" href="#main-content">Skip to main content</a>
+
+    <header class="site-header">
+        <div class="nav-container">
+            <a class="nav-logo" href="#home" data-page="home"><span class="dot" aria-hidden="true"></span>Niki Hayatbini</a>
+            <nav aria-label="Primary">
+                <ul class="nav-links" id="primary-navigation">
+                    <li><a href="#home" data-page="home" aria-current="page">About</a></li>
+                    <li><a href="#publications" data-page="publications">Publications</a></li>
+                    <li><a href="#media" data-page="media">Media</a></li>
+                    <li><a href="https://linktr.ee/dr_niki_hayatbini" target="_blank" rel="noopener noreferrer">Links <span class="visually-hidden">(opens in a new tab)</span></a></li>
+                </ul>
+            </nav>
+            <div class="nav-cta">
+                <a class="cv-btn" href="./CV_Hayatbini.pdf" target="_blank" rel="noopener noreferrer"><span class="cv-btn-text">Download </span>CV</a>
+                <button class="mobile-menu-btn" aria-expanded="false" aria-controls="primary-navigation" aria-label="Toggle navigation menu" type="button">☰</button>
+            </div>
+        </div>
+    </header>
+
+    <main class="main-content" id="main-content">
+
+        <!-- HOME PAGE -->
+        <section id="home-page" class="page active" aria-labelledby="home-heading">
+            <div class="hero-section">
+                <span class="eyebrow">Postdoctoral Scholar · NIH T32 Fellow</span>
+            </div>
+
+            <div class="profile-container">
+                <div class="hero-copy">
+                    <h1 class="name" id="home-heading" tabindex="-1">Hi, I'm <span class="accent">Niki</span>.</h1>
+                    <p class="role">I build <strong>AI/ML models</strong> on large-scale population health data, <strong>NHANES</strong> and <strong>All of Us</strong> , to understand nutrition, behavior, and disease risk, and to translate that signal into something people can actually use.</p>
+                    <ul class="social-icons" style="list-style:none; padding:0; margin-top:1rem;">
+                        <li>
+                            <a href="https://scholar.google.com/citations?user=qSFgtAsAAAAJ&hl=en" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="Niki Hayatbini on Google Scholar (opens in a new tab)" title="Google Scholar">
+                                <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false">
+                                    <path d="M5.242 13.769L0.5 9.5 12 1l11.5 8.5-4.742 4.269C17.548 12.53 14.94 11.5 12 11.5s-5.548 1.03-6.758 2.269zM12 10a7 7 0 100 14 7 7 0 000-14z"/>
+                                </svg>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://x.com/hayatbininiki?s=11&t=CbMbX_1WpEKFMDkDu0P5ew" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="Niki Hayatbini on X, formerly Twitter (opens in a new tab)" title="X (Twitter)">
+                                <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false">
+                                    <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                                </svg>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://www.linkedin.com/in/niki-hayatbini/" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="Niki Hayatbini on LinkedIn (opens in a new tab)" title="LinkedIn">
+                                <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false">
+                                    <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                                </svg>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="portrait-frame">
+                    <img src="LinkedIN-photo.jpg" alt="Portrait of Niki Hayatbini" class="profile-pic">
+                </div>
+            </div>
+
+            <div class="signal-strip" aria-hidden="true">
+                <svg viewBox="0 0 900 64" preserveAspectRatio="none">
+                    <path d="M0,32 L120,32 L150,32 L165,8 L180,56 L195,32 L230,32 L400,32 L420,32 L435,10 L450,54 L465,32 L500,32 L900,32" />
+                </svg>
+            </div>
+
+            <ul class="vitals" aria-label="Research facts at a glance">
+                <li class="vital">
+                    <span class="vital-label">Current role</span>
+                    <span class="vital-value">NIH T32 Postdoctoral Fellow — <em>AI/ML &amp; Precision Nutrition</em></span>
+                </li>
+                <li class="vital">
+                    <span class="vital-label">Datasets</span>
+                    <span class="vital-value">NHANES · All of Us</span>
+                </li>
+                <li class="vital">
+                    <span class="vital-label">Prior post</span>
+                    <span class="vital-value">Postdoc, <em>UW School of Nursing &amp; Health Studies</em></span>
+                </li>
+                <li class="vital">
+                    <span class="vital-label">Methods focus</span>
+                    <span class="vital-value">NLP &amp; LLMs for digital mental health</span>
+                </li>
+                <li class="vital">
+                    <span class="vital-label">In review</span>
+                    <span class="vital-value">AI/ML in precision nutrition — systematic review, <em>Journal of Nutrition</em></span>
+                </li>
+                <li class="vital">
+                    <span class="vital-label">Mentorship</span>
+                    <span class="vital-value">Interdisciplinary teams across nursing, public health, psychology &amp; education</span>
+                </li>
+            </ul>
+
+            <section class="section" aria-labelledby="about-heading">
+                <h2 class="section-title" id="about-heading"><span class="index"></span>About</h2>
+                <p>I am a Postdoctoral Scholar supported by an NIH T32 fellowship in AI/ML and Precision Nutrition. In this role, I develop and evaluate machine learning and deep learning models applied to large-scale population data, including NHANES and All of Us datasets, to identify Type 2 Diabetes risk predictors and study nutrition-related health outcomes. I also led a systematic review and meta-analysis examining the application of AI and ML in precision nutrition interventions, with a focus on biomarkers, hypertension, lipid profiles, anthropometrics, and behavior change (manuscript under peer review in the <em>Journal of Nutrition</em>). My training spans advanced AI/ML methods, precision nutrition science, and translational research, and I actively contribute to manuscript preparation, grant development, conference presentations, and student mentorship within a multidisciplinary team of nutrition scientists, clinicians, and data scientists.</p>
+
+                <p>Prior to this fellowship, I completed a postdoctoral appointment at the University of Washington's School of Nursing and Health Studies, where my work sat at the intersection of AI, behavioral health, and digital mental health. I applied NLP and LLM-based methods to analyze large-scale social media data, integrating semantic metrics, human perception data, and network analysis to evaluate how different AI response types influenced user experience and emotional outcomes in online mental health communities. I led a multidisciplinary team of graduate and undergraduate students spanning social work, nursing, public health, psychology, and education to conduct a systematic review of youth behavioral health literature and develop evidence-based policy recommendations for K-12 mental health services. I also led the development of a youth wellness curriculum and built an online resource hub featuring AI-enhanced interactive dashboards (Tableau, Power BI) to disseminate behavioral health strategies to practitioners and community stakeholders.</p>
+
+                <p>My work has been published in peer-reviewed journals including <em>Psychiatry Research</em>, <em>Eating and Weight Disorders</em>, <em>PLOS ONE</em>, and <em>Psychological Reports</em>, and has been featured in media outlets such as <em>PsyPost</em> for its public health relevance.</p>
+            </section>
+
+            <section class="section" aria-labelledby="selected-pubs-heading">
+                <h2 class="section-title" id="selected-pubs-heading"><span class="index"></span>Selected Publications</h2>
+
+                <div class="publication-item">
+                    <span class="pub-year">2025</span>
+                    <div>
+                        <div class="publication-title">Coronavirus Anxiety Associated with Enhanced Orthorexia Nervosa Symptoms and Reduced Cognitive Flexibility</div>
+                        <div class="publication-venue">Hayatbini, N., Knauft, K. M. &amp; Kalia, V. <em>Psychological Reports.</em> <a href="https://doi.org/10.1177/00332941251343542" target="_blank" rel="noopener noreferrer">doi.org/10.1177/00332941251343542</a></div>
+                    </div>
+                </div>
+
+                <div class="publication-item">
+                    <span class="pub-year">2024</span>
+                    <div>
+                        <div class="publication-title">Rumination and Gender in the Relation Between Perceived Threat and State Anxiety During COVID-19</div>
+                        <div class="publication-venue">Knauft, K. M., Hayatbini, N., Wilensky, S. M., &amp; Kalia, V. <em>Psychological Reports.</em> <a href="https://doi.org/10.1177/00332941241246491" target="_blank" rel="noopener noreferrer">doi.org/10.1177/00332941241246491</a></div>
+                    </div>
+                </div>
+
+                <div class="publication-item">
+                    <span class="pub-year">2021</span>
+                    <div>
+                        <div class="publication-title">Are Orthorexia Nervosa Symptoms Associated with Deficits in Inhibitory Control?</div>
+                        <div class="publication-venue">Hayatbini, N., Oberle, C.D. &amp; Ali, M.N. <em>Journal of Eating and Weight Disorders — Studies on Anorexia, Bulimia and Obesity, 26(5), 1553–1557.</em> <a href="https://doi.org/10.1007/s40519-020-00979-4" target="_blank" rel="noopener noreferrer">doi.org/10.1007/s40519-020-00979-4</a></div>
+                    </div>
+                </div>
+
+                <div class="publication-item">
+                    <span class="pub-year">2019</span>
+                    <div>
+                        <div class="publication-title">Are Orthorexia Nervosa Symptoms Associated with Cognitive Inflexibility?</div>
+                        <div class="publication-venue">Hayatbini, N. &amp; Oberle, C.D. <em>Psychiatry Research, 271, 464–468.</em> <a href="https://doi.org/10.1016/j.psychres.2018.12.017" target="_blank" rel="noopener noreferrer">doi.org/10.1016/j.psychres.2018.12.017</a></div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="section" aria-labelledby="blog-heading">
+                <h2 class="section-title" id="blog-heading"><span class="index"></span>Blog</h2>
+                <p><strong>Stay tuned!</strong></p>
+            </section>
+        </section>
+
+        <!-- PUBLICATIONS PAGE -->
+        <section id="publications-page" class="page" aria-labelledby="publications-heading">
+            <div class="hero-section">
+                <span class="eyebrow">Peer-reviewed work</span>
+                <h1 class="name" id="publications-heading" tabindex="-1">Publications</h1>
+            </div>
+
+            <section class="section" aria-label="Full publication list">
+                <div class="publication-full-item">
+                    <span class="pub-year" style="width:fit-content; padding:0.35rem 0.9rem;">2025</span>
+                    <div>
+                        <div class="publication-full-title">Coronavirus Anxiety Associated with Enhanced Orthorexia Nervosa Symptoms and Reduced Cognitive Flexibility</div>
+                        <div class="publication-full-authors">Hayatbini, N., Knauft, K. M. &amp; Kalia, V.</div>
+                        <div class="publication-full-venue">Psychological Reports. <a href="https://doi.org/10.1177/00332941251343542" target="_blank" rel="noopener noreferrer" class="publication-link">doi.org/10.1177/00332941251343542</a></div>
+                        <span class="publication-impact">Impact factor 1.7</span>
+                    </div>
+                </div>
+
+                <div class="publication-full-item">
+                    <span class="pub-year" style="width:fit-content; padding:0.35rem 0.9rem;">2024</span>
+                    <div>
+                        <div class="publication-full-title">Rumination and Gender in the Relation Between Perceived Threat and State Anxiety During COVID-19</div>
+                        <div class="publication-full-authors">Knauft, K. M., Hayatbini, N., Wilensky, S. M., &amp; Kalia, V.</div>
+                        <div class="publication-full-venue">Psychological Reports. <a href="https://doi.org/10.1177/00332941241246491" target="_blank" rel="noopener noreferrer" class="publication-link">doi.org/10.1177/00332941241246491</a></div>
+                        <span class="publication-impact">Impact factor 1.7</span>
+                    </div>
+                </div>
+
+                <div class="publication-full-item">
+                    <span class="pub-year" style="width:fit-content; padding:0.35rem 0.9rem;">2021</span>
+                    <div>
+                        <div class="publication-full-title">Adverse Childhood Experiences (ACEs) Associated with Reduced Cognitive Flexibility in Both College and Community Samples</div>
+                        <div class="publication-full-authors">Kalia, V., Knauft, K., Hayatbini, N.</div>
+                        <div class="publication-full-venue">PLoS One, 16(12), e0260822. <a href="https://doi.org/10.1371/journal.pone.0260822" target="_blank" rel="noopener noreferrer" class="publication-link">doi.org/10.1371/journal.pone.0260822</a></div>
+                        <span class="publication-impact">Impact factor 2.9</span>
+                    </div>
+                </div>
+
+                <div class="publication-full-item">
+                    <span class="pub-year" style="width:fit-content; padding:0.35rem 0.9rem;">2021</span>
+                    <div>
+                        <div class="publication-full-title">Cognitive Reappraisal Moderates the Relationship Between Perfectionism and Cognitive Flexibility</div>
+                        <div class="publication-full-authors">Hayatbini, N., Knauft, K., &amp; Kalia, V.</div>
+                        <div class="publication-full-venue">Journal of Clinical Psychology, 77(7), 1685–1699. <a href="https://doi.org/10.1002/jclp.23124" target="_blank" rel="noopener noreferrer" class="publication-link">doi.org/10.1002/jclp.23124</a></div>
+                        <span class="publication-impact">Impact factor 2.5</span>
+                    </div>
+                </div>
+
+                <div class="publication-full-item">
+                    <span class="pub-year" style="width:fit-content; padding:0.35rem 0.9rem;">2021</span>
+                    <div>
+                        <div class="publication-full-title">Are Orthorexia Nervosa Symptoms Associated with Deficits in Inhibitory Control?</div>
+                        <div class="publication-full-authors">Hayatbini, N., Oberle, C.D. &amp; Ali, M.N.</div>
+                        <div class="publication-full-venue">Journal of Eating and Weight Disorders — Studies on Anorexia, Bulimia and Obesity, 26(5), 1553–1557.</div>
+                        <span class="publication-impact">Impact factor 2.9</span>
+                    </div>
+                </div>
+
+                <div class="publication-full-item">
+                    <span class="pub-year" style="width:fit-content; padding:0.35rem 0.9rem;">2020</span>
+                    <div>
+                        <div class="publication-full-title">Cognitive Flexibility and Perceived Threat from COVID-19 Mediate the Relationship Between Childhood Maltreatment and State Anxiety</div>
+                        <div class="publication-full-authors">Kalia, V., Knauft, K., &amp; Hayatbini, N.</div>
+                        <div class="publication-full-venue">PLoS One, 15(12), e0243881. <a href="https://doi.org/10.1371/journal.pone.0243881" target="_blank" rel="noopener noreferrer" class="publication-link">doi.org/10.1371/journal.pone.0243881</a></div>
+                        <span class="publication-impact">Impact factor 2.9</span>
+                    </div>
+                </div>
+
+                <div class="publication-full-item">
+                    <span class="pub-year" style="width:fit-content; padding:0.35rem 0.9rem;">2019</span>
+                    <div>
+                        <div class="publication-full-title">Are Orthorexia Nervosa Symptoms Associated with Cognitive Inflexibility?</div>
+                        <div class="publication-full-authors">Hayatbini, N. &amp; Oberle, C.D.</div>
+                        <div class="publication-full-venue">Psychiatry Research, 271, 464–468.</div>
+                        <span class="publication-impact">Impact factor 4.2</span>
+                    </div>
+                </div>
+
+                <div class="publication-full-item">
+                    <span class="pub-year" style="width:fit-content; padding:0.35rem 0.9rem;">2017</span>
+                    <div>
+                        <div class="publication-full-title">Body Image Coping Strategies Among Aesthetic Surgery Clients in Iran</div>
+                        <div class="publication-full-authors">Yazdandoost, R.Y., Hayatbini, N., Fatemi, M.</div>
+                        <div class="publication-full-venue">World Journal of Plastic Surgery, 6(2), 159–163.</div>
+                    </div>
+                </div>
+
+                <div class="publication-full-item">
+                    <span class="pub-year" style="width:fit-content; padding:0.35rem 0.9rem;">2016</span>
+                    <div>
+                        <div class="publication-full-title">A Comparative Study of Body Image Dissatisfaction and Psychological Symptoms Among Invasive and Minimally Invasive Aesthetic Surgery Clients and Control Group</div>
+                        <div class="publication-full-authors">Yazdandoost, R.Y., Hayatbini, N., Asgharnejad Farid, A., Gharaee, B. &amp; Latifi, N.</div>
+                        <div class="publication-full-venue">World Journal of Plastic Surgery, 5(2), 144–149.</div>
+                    </div>
+                </div>
+            </section>
+        </section>
+
+        <!-- MEDIA COVERAGE PAGE -->
+        <section id="media-page" class="page" aria-labelledby="media-heading">
+            <div class="hero-section">
+                <span class="eyebrow">In the press</span>
+                <h1 class="name" id="media-heading" tabindex="-1">Media Coverage</h1>
+            </div>
+
+            <section class="section" aria-label="Press coverage of research">
+                <div class="media-item">
+                    <h3 class="media-title">Perfectionism, cognitive flexibility, and emotional suppression</h3>
+                    <p class="media-byline">PsyPost · coverage of Hayatbini, Knauft &amp; Kalia (2021)</p>
+                    <p class="media-description">This PsyPost piece covers the Journal of Clinical Psychology study, unpacking why perfectionistic individuals tend to see stressful situations as outside their control, and how the emotion-regulation strategy of cognitive reappraisal may help them view difficult moments as more manageable.</p>
+                    <a href="https://psypost.org/2021/07/perfectionistic-tendencies-are-associated-with-reduced-cognitive-flexibility-and-heightened-emotional-suppression-61542" target="_blank" rel="noopener noreferrer" class="media-link">Read the coverage on PsyPost <span class="visually-hidden">(opens in a new tab)</span> →</a>
+                </div>
+
+                <div class="media-item">
+                    <h3 class="media-title">Coronavirus anxiety and obsessive healthy eating</h3>
+                    <p class="media-byline">PsyPost · coverage of Hayatbini, Knauft &amp; Kalia (2025)</p>
+                    <p class="media-description">This PsyPost piece summarizes the Psychological Reports study, describing how pandemic-related anxiety, paired with reduced cognitive flexibility, was linked to heightened orthorexia nervosa symptoms as some people turned to rigid "clean eating" as a coping response.</p>
+                    <a href="https://www.psypost.org/coronavirus-anxiety-linked-to-obsessive-healthy-eating-behaviors-during-the-pandemic/" target="_blank" rel="noopener noreferrer" class="media-link">Read the coverage on PsyPost <span class="visually-hidden">(opens in a new tab)</span> →</a>
+                </div>
+            </section>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <p>&copy; <span id="year"></span> Niki Hayatbini. Built with care for readability and access.</p>
+    </footer>
+
+    <script>
+        (function () {
+            'use strict';
+
+            var pages = ['home', 'publications', 'media'];
+            var titles = {
+                home: 'Niki Hayatbini, PhD — Postdoctoral Scholar',
+                publications: 'Publications — Niki Hayatbini, PhD',
+                media: 'Media Coverage — Niki Hayatbini, PhD'
+            };
+
+            var navLinks = document.querySelectorAll('.nav-links a[data-page], .nav-logo[data-page]');
+            var mobileBtn = document.querySelector('.mobile-menu-btn');
+            var navList = document.getElementById('primary-navigation');
+
+            function showPage(pageName, opts) {
+                opts = opts || {};
+                if (pages.indexOf(pageName) === -1) { pageName = 'home'; }
+
+                pages.forEach(function (name) {
+                    var section = document.getElementById(name + '-page');
+                    if (section) { section.classList.toggle('active', name === pageName); }
+                });
+
+                navLinks.forEach(function (link) {
+                    if (link.dataset.page === pageName) {
+                        link.setAttribute('aria-current', 'page');
+                    } else {
+                        link.removeAttribute('aria-current');
+                    }
+                });
+
+                document.title = titles[pageName] || titles.home;
+
+                if (opts.pushState !== false) {
+                    history.pushState(null, '', pageName === 'home' ? window.location.pathname : '#' + pageName);
+                }
+
+                var heading = document.getElementById(pageName + '-heading');
+                if (heading && opts.focusHeading !== false) {
+                    heading.focus({ preventScroll: false });
+                }
+
+                if (navList && navList.classList.contains('active')) {
+                    navList.classList.remove('active');
+                    if (mobileBtn) { mobileBtn.setAttribute('aria-expanded', 'false'); }
+                }
+            }
+
+            navLinks.forEach(function (link) {
+                link.addEventListener('click', function (event) {
+                    event.preventDefault();
+                    showPage(link.dataset.page);
+                });
+            });
+
+            window.addEventListener('popstate', function () {
+                var hash = window.location.hash.replace('#', '');
+                showPage(hash || 'home', { pushState: false });
+            });
+
+            if (mobileBtn && navList) {
+                mobileBtn.addEventListener('click', function () {
+                    var isOpen = navList.classList.toggle('active');
+                    mobileBtn.setAttribute('aria-expanded', String(isOpen));
+                });
+            }
+
+            document.getElementById('year').textContent = new Date().getFullYear();
+
+            var initialHash = window.location.hash.replace('#', '');
+            if (initialHash && pages.indexOf(initialHash) !== -1) {
+                showPage(initialHash, { pushState: false, focusHeading: false });
+            }
+        })();
+    </script>
+</body>
+</html>
